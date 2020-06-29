@@ -1,6 +1,6 @@
 require 'sinatra/base'
 
-class Bookmark < Sinatra::Base
+class Bookmark_Manager < Sinatra::Base
   enable :sessions
 
   get '/' do
