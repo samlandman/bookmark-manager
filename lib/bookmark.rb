@@ -1,11 +1,13 @@
 class Bookmark
-attr_reader :bookmarks
-
   @bookmarks = [
     "www.cats.com",
     "www.dogs.com"
   ]
-  @bookmarks.join
+def self.all
+  @bookmarks
+end
+
+  # @bookmarks.join
   # attr_reader :user, :url, :name, :tag_collection, :comment_collection
   #
   # def self.all

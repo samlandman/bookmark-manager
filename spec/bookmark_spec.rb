@@ -1,9 +1,7 @@
 require './lib/bookmark'
 
-xdescribe Bookmark do
-
+describe Bookmark do
   it 'should contain' do
-    expect(bookmark.user).to eq("Josh")
-  end
-
+    expect(Bookmark.all.join).to eq("www.cats.comwww.dogs.com")
+   end
 end

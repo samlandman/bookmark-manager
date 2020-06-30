@@ -3,8 +3,11 @@
 <body style="background-color:#00CDBC;">
 
 <h2>My bookmarks</h2>
-
-<%= @bookmarks %>
+<ul>
+  <% @bookmarks.each do |bookmark| %>
+    <li><%= bookmark %></li>
+  <% end %>
+</ul>
 
 </body>
 </html>
