@@ -13,10 +13,17 @@ The LocalHost should be used to run this program.
 To connect a database to the file, perform the following 
 
 1) Connect to psql
-2) Create the database using the psql command CREATE DATABASE bookmark_manager;
-3) Connect to the database using the pqsl command \c bookmark_manager;
+2) Create the database using the psql command ```bashCREATE DATABASE bookmark_manager;```
+3) Connect to the database using the pqsl command ```bash\c bookmark_manager;```
 4) Run the query we have saved in the file 01_create_bookmarks_table.sql
 
+To run the rspec tests, perform the following
+
+```bash
+$> psql
+admin=# CREATE DATABASE "bookmark_manager_test";
+admin=# CREATE TABLE bookmarks(id SERIAL PRIMARY KEY, url VARCHAR(60));
+```
 To see the code in action Clone the directory, and perform the following in the terminal:
 
 ```bash

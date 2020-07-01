@@ -1,11 +1,16 @@
 require './lib/bookmark'
 
 describe Bookmark do
-  let(:conn) { PG.connect( dbname: 'bookmark_manager_test' ) }
     describe ".all" do
       it "returns all bookmarks" do
+        connection = PG.connect(dbname: 'bookmark_manager_test')
+         # Add the test data
+        connection.exec("INSERT INTO bookmarks (url) VALUES ('http://www.makersacademy.com');")
+        connection.exec("INSERT INTO bookmarks (url) VALUES('http://www.destroyallsoftware.com');")
+        connection.exec("INSERT INTO bookmarks (url) VALUES('http://www.google.com');")
+        #test
         bookmarks = Bookmark.all
-        expect(bookmarks).to include("www.google.com")
+        expect(bookmarks).to include("http://www.google.com")
       end
     end
   end
