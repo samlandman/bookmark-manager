@@ -1,3 +1,6 @@
+
+
+
 feature 'Testing the infrastructure of our app' do
   scenario 'Testing the user can see Hello World on the page' do
     visit('/')
@@ -5,11 +8,14 @@ feature 'Testing the infrastructure of our app' do
   end
 end
 
+
+
 feature 'Testing the bookmarks page' do
+  let(:conn) { PG.connect( dbname: 'bookmark_manager_test' ) }
   scenario 'User is forwarded to /bookmarks and can see a list of bookmarks' do
-    visit('/')
+     visit('/')
     click_button('my_bookmarks')
-    expect(page).to have_content("www")
-    expect(page).to have_content("www")
+    expect(page).to have_content("www.google.com")
+    expect(page).to have_content("www.google.com")
   end
 end
