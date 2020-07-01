@@ -12,6 +12,10 @@ def self.all
   result.map { |bookmark| bookmark['url'] }
 end
 
+def self.create(param)
+  puts "We are in the Create Method"
+end
+
   #
   #
   # def initialize(user, url, name, tag_collection, comment_collection)

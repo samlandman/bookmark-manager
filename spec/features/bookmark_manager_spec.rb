@@ -41,4 +41,24 @@ feature 'Testing the bookmarks page' do
     expect(page).to have_content("www.google.com")
     expect(page).to have_content("www.makersacademy.com")
   end
+
+  feature 'Testing the bookmarks page' do
+    scenario 'User is forwarded to /bookmarks and can see a list of bookmarks' do
+      connection = PG.connect(dbname: 'bookmark_manager_test')
+  
+      # Add the test data
+      connection.exec("INSERT INTO bookmarks VALUES(1, 'http://www.makersacademy.com');")
+      connection.exec("INSERT INTO bookmarks VALUES(2, 'http://www.destroyallsoftware.com');")
+      connection.exec("INSERT INTO bookmarks VALUES(3, 'http://www.google.com');")
+  
+      visit('/')
+      click_button('add_bookmarks')
+      #In Add_Bookmark Page
+      #Write some text in a form
+      fill_in :bookmark_form, with: 'www.facebook.com'
+      click_button('submit_bookmark')
+      #Expect to see our bookmark on the bookmarks page
+      expect(page).to have_content("www.facebook.com")
+    end
+  end
 end
