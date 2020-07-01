@@ -1,27 +1,13 @@
 require 'pg'
 
-
 class Bookmark
   
-  @bookmarks = [
-    "www.cats.com",
-    "www.dogs.com"
-  ]
 def self.all
   conn = PG.connect( dbname: 'bookmark_manager' )
-  result = conn.exec( "SELECT * FROM bookmarks" ) do |result|
+  result = conn.exec( "SELECT * FROM bookmarks" ) 
   result.map { |bookmark| bookmark['url'] }
-  end
 end
 
-  # @bookmarks.join
-  # attr_reader :user, :url, :name, :tag_collection, :comment_collection
-  #
-  # def self.all
-  #   bookmarks = {
-  #
-  #   }
-  # end
   #
   #
   # def initialize(user, url, name, tag_collection, comment_collection)
