@@ -10,12 +10,12 @@ end
 
 feature 'Viewing bookmarks' do
   scenario 'A user can see bookmarks' do
-    connection = PG.connect(dbname: 'bookmark_manager_test')
+    # connection = PG.connect(dbname: 'bookmark_manager_test')
 
-    # Add the test data
-    connection.exec("INSERT INTO bookmarks(name,url) VALUES('Makers', 'http://www.makersacademy.com');")
-    connection.exec("INSERT INTO bookmarks(name,url) VALUES('Destroy all software', 'http://www.destroyallsoftware.com');")
-    connection.exec("INSERT INTO bookmarks(name,url) VALUES('Google', 'http://www.google.com');")
+    # # Add the test data
+    # connection.exec("INSERT INTO bookmarks(title,url) VALUES('Makers', 'http://www.makersacademy.com');")
+    # connection.exec("INSERT INTO bookmarks(title,url) VALUES('Destroy all software', 'http://www.destroyallsoftware.com');")
+    # connection.exec("INSERT INTO bookmarks(title,url) VALUES('Google', 'http://www.google.com');")
 
     visit('/bookmarks')
 
@@ -28,12 +28,12 @@ end
 
 feature 'Testing the bookmarks page' do
   scenario 'User is forwarded to /bookmarks and can see a list of bookmarks' do
-    connection = PG.connect(dbname: 'bookmark_manager_test')
+    # connection = PG.connect(dbname: 'bookmark_manager_test')
 
-    # Add the test data
-    connection.exec("INSERT INTO bookmarks(name,url) VALUES('Makers', 'http://www.makersacademy.com');")
-    connection.exec("INSERT INTO bookmarks(name,url) VALUES('Destroy all software', 'http://www.destroyallsoftware.com');")
-    connection.exec("INSERT INTO bookmarks(name,url) VALUES('Google', 'http://www.google.com');")
+    # # Add the test data
+    # connection.exec("INSERT INTO bookmarks(title,url) VALUES('Makers', 'http://www.makersacademy.com');")
+    # connection.exec("INSERT INTO bookmarks(title,url) VALUES('Destroy all software', 'http://www.destroyallsoftware.com');")
+    # connection.exec("INSERT INTO bookmarks(title,url) VALUES('Google', 'http://www.google.com');")
 
      visit('/')
     click_button('my_bookmarks')
@@ -43,12 +43,12 @@ feature 'Testing the bookmarks page' do
 
   feature 'Testing the bookmarks page' do
     scenario 'User is forwarded to /bookmarks and can see a list of bookmarks' do
-      connection = PG.connect(dbname: 'bookmark_manager_test')
+      # connection = PG.connect(dbname: 'bookmark_manager_test')
   
-      # Add the test data
-      connection.exec("INSERT INTO bookmarks(name,url) VALUES('Makers', 'http://www.makersacademy.com');")
-      connection.exec("INSERT INTO bookmarks(name,url) VALUES('Destroy all software', 'http://www.destroyallsoftware.com');")
-      connection.exec("INSERT INTO bookmarks(name,url) VALUES('Google', 'http://www.google.com');")
+      # # Add the test data
+      # connection.exec("INSERT INTO bookmarks(title,url) VALUES('Makers', 'http://www.makersacademy.com');")
+      # connection.exec("INSERT INTO bookmarks(title,url) VALUES('Destroy all software', 'http://www.destroyallsoftware.com');")
+      # connection.exec("INSERT INTO bookmarks(title,url) VALUES('Google', 'http://www.google.com');")
   
       visit('/')
       click_button('add_bookmarks')

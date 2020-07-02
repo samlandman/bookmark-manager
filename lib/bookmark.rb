@@ -1,17 +1,17 @@
 require 'pg'
 
 class Bookmark
-  attr_reader :name, :url
+  attr_reader :name, :url, :id
   
 def self.all
   database_selector
   result = @connection.exec( "SELECT * FROM bookmarks" ) 
-  result.map { |bookmark| Bookmark.new(bookmark['name'],bookmark['url']) }
+  result.map { |bookmark| Bookmark.new(bookmark['title'],bookmark['url']) }
 end
 
 def self.create(url = nil, name = nil)
   database_selector
-  @connection.exec("INSERT INTO bookmarks(url,name)VALUES('#{url}','#{name}')")
+  @connection.exec("INSERT INTO bookmarks(url,title)VALUES('#{url}','#{name}')")
 end
 
 def initialize(name = nil,url)
@@ -29,6 +29,13 @@ end
   #   @comment_collection = comment_collection
   #
   # end
+  def self.delete(input)
+    input = input.delete('checkbox')
+    
+    database_selector
+
+    @connection.exec("DELETE FROM bookmarks WHERE title='#{input}'")
+  end
 
   private
 
@@ -39,5 +46,7 @@ end
       @connection = PG.connect( dbname: 'bookmark_manager' )
     end
   end
+
+  
 
 end

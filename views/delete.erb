@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color:#00CDBC;">
+
+<h2>My bookmarks</h2>
+<ul>
+  <% @bookmarks.each do |bookmark| %>
+    <li class="bookmark" id="bookmark-<%= bookmark.id %>">
+      <a href="<%= bookmark.url %>" target="_blank">
+        <%= bookmark.name %>
+      </a>
+      <form action="/bookmarks/<%= bookmark.id %>" method="post">
+        <input type='hidden' name='_method' value='DELETE'/>
+        <input type="submit" value="Delete" />
+      </form>
+    </li>
+  <% end %>
+</ul>
+
+</body>
+</html>

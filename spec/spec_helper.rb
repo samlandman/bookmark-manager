@@ -2,11 +2,11 @@ require_relative './setup_test_database'
 
 ENV['ENVIRONMENT'] = 'test'
 
-RSpec.configure do |config|
-  config.before(:each) do
-    setup_test_database
-  end
-end
+# RSpec.configure do |config|
+#   config.before(:each) do
+#     setup_test_database
+#   end
+# end
 
 ENV['RACK_ENV'] = 'test'
 
@@ -36,6 +36,15 @@ Capybara.app = Bookmark_Manager
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+
+  config.before(:each) do
+    setup_test_database
+
+    connection = PG.connect(dbname: 'bookmark_manager_test')
+    connection.exec("INSERT INTO bookmarks(title,url) VALUES('Makers', 'http://www.makersacademy.com');")
+    connection.exec("INSERT INTO bookmarks(title,url) VALUES('Destroy all software', 'http://www.destroyallsoftware.com');")
+    connection.exec("INSERT INTO bookmarks(title,url) VALUES('Google', 'http://www.google.com');")
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
