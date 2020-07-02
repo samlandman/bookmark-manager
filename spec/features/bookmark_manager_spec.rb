@@ -13,15 +13,14 @@ feature 'Viewing bookmarks' do
     connection = PG.connect(dbname: 'bookmark_manager_test')
 
     # Add the test data
-    connection.exec("INSERT INTO bookmarks VALUES(1, 'http://www.makersacademy.com');")
-    connection.exec("INSERT INTO bookmarks VALUES(2, 'http://www.destroyallsoftware.com');")
-    connection.exec("INSERT INTO bookmarks VALUES(3, 'http://www.google.com');")
+    connection.exec("INSERT INTO bookmarks(name,url) VALUES('Makers', 'http://www.makersacademy.com');")
+    connection.exec("INSERT INTO bookmarks(name,url) VALUES('Destroy all software', 'http://www.destroyallsoftware.com');")
+    connection.exec("INSERT INTO bookmarks(name,url) VALUES('Google', 'http://www.google.com');")
 
     visit('/bookmarks')
 
-    expect(page).to have_content "http://www.makersacademy.com"
-    expect(page).to have_content "http://www.destroyallsoftware.com"
-    expect(page).to have_content "http://www.google.com"
+    expect(page).to have_content("Google")
+    expect(page).to have_content("Makers")
   end
 end
 
@@ -32,14 +31,14 @@ feature 'Testing the bookmarks page' do
     connection = PG.connect(dbname: 'bookmark_manager_test')
 
     # Add the test data
-    connection.exec("INSERT INTO bookmarks VALUES(1, 'http://www.makersacademy.com');")
-    connection.exec("INSERT INTO bookmarks VALUES(2, 'http://www.destroyallsoftware.com');")
-    connection.exec("INSERT INTO bookmarks VALUES(3, 'http://www.google.com');")
+    connection.exec("INSERT INTO bookmarks(name,url) VALUES('Makers', 'http://www.makersacademy.com');")
+    connection.exec("INSERT INTO bookmarks(name,url) VALUES('Destroy all software', 'http://www.destroyallsoftware.com');")
+    connection.exec("INSERT INTO bookmarks(name,url) VALUES('Google', 'http://www.google.com');")
 
      visit('/')
     click_button('my_bookmarks')
-    expect(page).to have_content("www.google.com")
-    expect(page).to have_content("www.makersacademy.com")
+    expect(page).to have_content("Google")
+    expect(page).to have_content("Makers")
   end
 
   feature 'Testing the bookmarks page' do
@@ -47,18 +46,19 @@ feature 'Testing the bookmarks page' do
       connection = PG.connect(dbname: 'bookmark_manager_test')
   
       # Add the test data
-      connection.exec("INSERT INTO bookmarks VALUES(1, 'http://www.makersacademy.com');")
-      connection.exec("INSERT INTO bookmarks VALUES(2, 'http://www.destroyallsoftware.com');")
-      connection.exec("INSERT INTO bookmarks VALUES(3, 'http://www.google.com');")
+      connection.exec("INSERT INTO bookmarks(name,url) VALUES('Makers', 'http://www.makersacademy.com');")
+      connection.exec("INSERT INTO bookmarks(name,url) VALUES('Destroy all software', 'http://www.destroyallsoftware.com');")
+      connection.exec("INSERT INTO bookmarks(name,url) VALUES('Google', 'http://www.google.com');")
   
       visit('/')
       click_button('add_bookmarks')
       #In Add_Bookmark Page
       #Write some text in a form
-      fill_in :bookmark_form, with: 'www.facebook.com'
+      fill_in :url, with: 'www.facebook.com'
+      fill_in :name, with: 'Facebook'
       click_button('submit_bookmark')
       #Expect to see our bookmark on the bookmarks page
-      expect(page).to have_content("www.facebook.com")
+      expect(page).to have_content('Facebook')
     end
   end
 end

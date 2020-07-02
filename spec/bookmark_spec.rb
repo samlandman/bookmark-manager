@@ -10,7 +10,7 @@ describe Bookmark do
         connection.exec("INSERT INTO bookmarks (url) VALUES('http://www.google.com');")
         #test
         bookmarks = Bookmark.all
-        expect(bookmarks).to include("http://www.google.com")
+        expect(bookmarks.last.url).to eq("http://www.google.com")
       end
     end
   end

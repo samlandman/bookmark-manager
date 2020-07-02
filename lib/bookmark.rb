@@ -4,17 +4,14 @@ class Bookmark
   attr_reader :name, :url
   
 def self.all
-  if ENV['ENVIRONMENT'] == 'test'
-  connection = PG.connect(dbname: 'bookmark_manager_test')
-  else
-  connection = PG.connect( dbname: 'bookmark_manager' )
-  end
-  result = connection.exec( "SELECT * FROM bookmarks" ) 
+  database_selector
+  result = @connection.exec( "SELECT * FROM bookmarks" ) 
   result.map { |bookmark| Bookmark.new(bookmark['name'],bookmark['url']) }
 end
 
-def self.create(param)
-  puts "We are in the Create Method"
+def self.create(url = nil, name = nil)
+  database_selector
+  @connection.exec("INSERT INTO bookmarks(url,name)VALUES('#{url}','#{name}')")
 end
 
 def initialize(name = nil,url)
@@ -32,5 +29,15 @@ end
   #   @comment_collection = comment_collection
   #
   # end
+
+  private
+
+  def self.database_selector
+    if ENV['ENVIRONMENT'] == 'test'
+      @connection = PG.connect(dbname: 'bookmark_manager_test')
+    else
+      @connection = PG.connect( dbname: 'bookmark_manager' )
+    end
+  end
 
 end
